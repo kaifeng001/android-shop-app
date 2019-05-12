@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@android:color/holo_red_dark">
+
+    <com.example.ex_fengkai001.recyclerviewdemo.pinan.AvatarView
+        android:id="@+id/avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        app:offset="5dp">
+
+        <!--<com.makeramen.roundedimageview.RoundedImageView-->
+            <!--android:id="@+id/pic_1"-->
+            <!--android:layout_width="16dp"-->
+            <!--android:layout_height="16dp"-->
+            <!--android:scaleType="fitXY"-->
+            <!--android:src="@drawable/home_page_small_default3"-->
+            <!--app:riv_oval="true" />-->
+
+        <!--<com.makeramen.roundedimageview.RoundedImageView-->
+            <!--android:id="@+id/pic_2"-->
+            <!--android:layout_width="16dp"-->
+            <!--android:layout_height="16dp"-->
+            <!--android:scaleType="fitXY"-->
+            <!--android:src="@drawable/pro"-->
+            <!--app:riv_oval="true" />-->
+
+        <!--<com.makeramen.roundedimageview.RoundedImageView-->
+            <!--android:id="@+id/pic_3"-->
+            <!--android:layout_width="16dp"-->
+            <!--android:layout_height="16dp"-->
+            <!--android:scaleType="fitXY"-->
+            <!--android:src="@drawable/home_page_small_default3"-->
+            <!--app:riv_oval="true"-->
+            <!--android:visibility="gone"/>-->
+
+        <!--<com.makeramen.roundedimageview.RoundedImageView-->
+            <!--android:id="@+id/pic_4"-->
+            <!--android:layout_width="16dp"-->
+            <!--android:layout_height="16dp"-->
+            <!--android:scaleType="fitXY"-->
+            <!--android:src="@drawable/pro"-->
+            <!--app:riv_oval="true" />-->
+    </com.example.ex_fengkai001.recyclerviewdemo.pinan.AvatarView>
+</RelativeLayout>

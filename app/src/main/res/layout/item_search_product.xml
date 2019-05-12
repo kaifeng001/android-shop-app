@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/product_layout"
+    android:layout_width="145dp"
+    android:layout_height="195dp"
+    android:layout_marginLeft="15dp"
+    android:background="@drawable/shape_shadow"
+    android:layout_marginTop="15dp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/product_img"
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/pro"
+        app:riv_corner_radius_top_left="6dp"
+        app:riv_corner_radius_top_right="6dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_alignBottom="@id/product_img"
+        android:background="#22222222">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="18 I 最高6百万 I 2年"
+            android:layout_marginLeft="13dp"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/product_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/product_img"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="12dp"
+        android:text="少儿综合意外险"
+        android:textColor="#FF222222"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/product_max_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@id/product_title"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
+        android:text="0.01"
+        android:textColor="#FFFF8727"
+        android:textSize="22dp" />
+
+    <TextView
+        android:id="@+id/product_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/product_max_price"
+        android:layout_toRightOf="@id/product_max_price"
+        android:text="元起"
+        android:paddingBottom="4dp"
+        android:textColor="#FFA5A5A5"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/product_max_price"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/product_unit"
+        android:text="289.45元"
+        android:paddingBottom="4dp"
+        android:textColor="#FFA5A5A5"
+        android:textSize="12sp" />
+</RelativeLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="main_bottom_name">
+        <item>首页</item>
+        <item>推荐</item>
+        <item>搜索</item>
+        <item>聊天</item>
+        <item>个人中心</item>
+    </string-array>
+
+    <integer-array name="main_bottom_icon">
+        <item>@drawable/main_home</item>
+        <item>@drawable/main_remend</item>
+        <item>@drawable/main_search</item>
+        <item>@drawable/main_talk</item>
+        <item>@drawable/main_center</item>
+    </integer-array>
+
+</resources>

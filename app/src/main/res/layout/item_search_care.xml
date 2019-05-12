@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="117dp"
+    android:background="@android:color/white">
+
+    <RelativeLayout
+        android:id="@+id/care_pic_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/care_show_pic"
+            android:layout_width="113dp"
+            android:layout_height="76dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/home_page_small_default3"
+            app:riv_corner_radius="4dp" />
+
+        <TextView
+            android:id="@+id/care_type_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/care_show_pic"
+            android:layout_centerHorizontal="true"
+            android:text="大众4S店"
+            android:textColor="@android:color/white"
+            android:textSize="11sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/care_pic_layout"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/care_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="144dp"
+                android:singleLine="true"
+                android:text="爱空间汽车服务111111"
+                android:textColor="#FF222222"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/care_volume"
+                android:layout_width="22dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="7dp"
+                android:background="@drawable/background_rectangle_care_blue"
+                android:gravity="center"
+                android:text="券"
+                android:textColor="#FF269DFF"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/care_cash"
+                android:layout_width="32dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/background_rectangle_care_orange"
+                android:gravity="center"
+                android:text="现金"
+                android:textColor="#FFFF8727"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp">
+
+            <com.example.ex_fengkai001.recyclerviewdemo.pinan.SearchStarView
+                android:id="@+id/care_star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true">
+
+            </com.example.ex_fengkai001.recyclerviewdemo.pinan.SearchStarView>
+
+            <TextView
+                android:id="@+id/care_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/care_star"
+                android:text="2532单"
+                android:textColor="#FFA5A5A5"
+                android:textSize="12sp" />
+
+
+            <TextView
+                android:id="@+id/care_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:text="1.8KM"
+                android:textColor="#FFA5A5A5"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/care_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="地址：福田区福华路1046"
+            android:textColor="#FFA5A5A5"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:id="@+id/care_discount_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="22dp"
+                android:layout_height="16dp"
+                android:background="@drawable/background_rectangle_care_red"
+                android:gravity="center"
+                android:text="惠"
+                android:textColor="#FFFF2640"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/care_discount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="1000减100优惠"
+                android:textColor="#FF222222"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

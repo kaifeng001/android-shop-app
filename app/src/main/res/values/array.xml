@@ -10,11 +10,11 @@
     </string-array>
 
     <integer-array name="main_bottom_icon">
-        <item>@drawable/main_home</item>
-        <item>@drawable/main_remend</item>
-        <item>@drawable/main_search</item>
-        <item>@drawable/main_talk</item>
-        <item>@drawable/main_center</item>
+        <item>@mipmap/main_home</item>
+        <item>@mipmap/main_remend</item>
+        <item>@mipmap/main_search</item>
+        <item>@mipmap/main_talk</item>
+        <item>@mipmap/main_center</item>
     </integer-array>
 
 </resources>

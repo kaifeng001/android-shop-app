@@ -7,4 +7,7 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <style name="CheckboxStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_button_select</item>
+    </style>
 </resources>

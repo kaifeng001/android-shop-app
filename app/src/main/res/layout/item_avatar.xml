@@ -5,7 +5,7 @@
     android:layout_height="50dp"
     android:background="@android:color/holo_red_dark">
 
-    <com.example.ex_fengkai001.recyclerviewdemo.pinan.AvatarView
+    <com.fengkai.zhouyang.yangyanghongkong.pinan.AvatarView
         android:id="@+id/avatar"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
@@ -43,5 +43,5 @@
             <!--android:scaleType="fitXY"-->
             <!--android:src="@drawable/pro"-->
             <!--app:riv_oval="true" />-->
-    </com.example.ex_fengkai001.recyclerviewdemo.pinan.AvatarView>
+    </com.fengkai.zhouyang.yangyanghongkong.pinan.AvatarView>
 </RelativeLayout>

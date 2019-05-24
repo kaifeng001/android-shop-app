@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="88dp"
         android:scaleType="fitXY"
-        android:src="@drawable/pro"
+        android:src="@mipmap/pro"
         app:riv_corner_radius_top_left="6dp"
         app:riv_corner_radius_top_right="6dp" />
 

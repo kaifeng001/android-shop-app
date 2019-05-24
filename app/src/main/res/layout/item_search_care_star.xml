@@ -9,7 +9,7 @@
         android:layout_width="11dp"
         android:layout_height="11dp"
         android:scaleType="fitXY"
-        android:src="@drawable/search_care_star_light" />
+        android:src="@mipmap/search_care_star_light" />
 
     <ImageView
         android:id="@+id/care_second_star"
@@ -17,7 +17,7 @@
         android:layout_height="11dp"
         android:layout_marginRight="4dp"
         android:scaleType="fitXY"
-        android:src="@drawable/search_care_star_light" />
+        android:src="@mipmap/search_care_star_light" />
 
     <ImageView
         android:id="@+id/care_third_star"
@@ -25,7 +25,7 @@
         android:layout_height="11dp"
         android:layout_marginRight="4dp"
         android:scaleType="fitXY"
-        android:src="@drawable/search_care_star_light" />
+        android:src="@mipmap/search_care_star_light" />
 
     <ImageView
         android:id="@+id/care_fourth_star"
@@ -33,14 +33,14 @@
         android:layout_height="11dp"
         android:layout_marginRight="4dp"
         android:scaleType="fitXY"
-        android:src="@drawable/search_care_star_light" />
+        android:src="@mipmap/search_care_star_light" />
 
     <ImageView
         android:id="@+id/care_fifth_star"
         android:layout_width="11dp"
         android:layout_height="11dp"
         android:scaleType="fitXY"
-        android:src="@drawable/search_care_star_normal" />
+        android:src="@mipmap/search_care_star_normal" />
 
     <TextView
         android:id="@+id/care_score"

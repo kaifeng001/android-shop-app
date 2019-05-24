@@ -17,7 +17,7 @@
             android:layout_width="113dp"
             android:layout_height="76dp"
             android:scaleType="fitXY"
-            android:src="@drawable/home_page_small_default3"
+            android:src="@mipmap/home_page_small_default3"
             app:riv_corner_radius="4dp" />
 
         <TextView
@@ -83,14 +83,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp">
 
-            <com.example.ex_fengkai001.recyclerviewdemo.pinan.SearchStarView
+            <com.fengkai.zhouyang.yangyanghongkong.pinan.SearchStarView
                 android:id="@+id/care_star"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:layout_centerVertical="true">
 
-            </com.example.ex_fengkai001.recyclerviewdemo.pinan.SearchStarView>
+            </com.fengkai.zhouyang.yangyanghongkong.pinan.SearchStarView>
 
             <TextView
                 android:id="@+id/care_order"

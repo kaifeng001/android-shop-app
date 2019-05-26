@@ -1,18 +1,22 @@
 package com.fengkai.zhouyang.yangyanghongkong.home.presenter;
 
-import android.util.Log;
 
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.Product;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.ProductImpl;
+import com.fengkai.zhouyang.yangyanghongkong.home.adapter.RecommendAdapter;
 import com.fengkai.zhouyang.yangyanghongkong.home.port.IRecommend;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class RecommendPresenter {
     private IRecommend mRecommend;
     private ProductImpl mImp;
     private List<Product> mList = new ArrayList<>();
+    private HashMap<Integer, Product> mSelects = new HashMap<>();
     private List<Product> mSelectProducts = new ArrayList<>();
 
     public RecommendPresenter(IRecommend recommend) {
@@ -24,13 +28,17 @@ public class RecommendPresenter {
         List<Product> products = mImp.queryAllData();
         mList.clear();
         mList.addAll(products);
-        mRecommend.initRecyclerView(products);
+
+        Product addType = new Product();
+        addType.type = RecommendAdapter.ADD_TYPE;
+        mList.add(addType);
+        mRecommend.initRecyclerView(mList);
     }
 
-    public boolean isUseBackKeyEvent() {
+    public boolean isBackEditState() {
         if (mRecommend.getEditState()) {
             mRecommend.exitEditState();
-            mSelectProducts.clear();
+            mSelects.clear();
             return true;
         } else {
             return false;
@@ -40,16 +48,16 @@ public class RecommendPresenter {
     public void joinEditState(int position) {
         mRecommend.joinEditState();
         Product product = mList.get(position);
-        mSelectProducts.add(product);
+        mSelects.put(position, product);
     }
 
     public void dealCheckListener(int position, boolean isChecked) {
         if (isChecked) {
-            mSelectProducts.add(mList.get(position));
+            mSelects.put(position, mList.get(position));
         } else {
-            mSelectProducts.remove(mList.get(position));
+            mSelects.remove(position);
         }
-        int size = mSelectProducts.size();
+        int size = mSelects.size();
         if (size == 1) {
             mRecommend.productIsEdited(true);
         } else {
@@ -58,12 +66,17 @@ public class RecommendPresenter {
     }
 
     public void deleteSelectProduct() {
-        int size = mSelectProducts.size();
-        for (int i = 0; i < size; i++) {
-            Product product = mSelectProducts.get(i);
-            int id = product.id;
-            mImp.deleteProductById(id);
+        Iterator<Map.Entry<Integer, Product>> iterator = mSelects.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Integer, Product> next = iterator.next();
+            int position = next.getKey();
+            Product product = next.getValue();
+            mImp.deleteProductById(product.id);
             mList.remove(product);
+            mRecommend.removeItem(position, mList);
+        }
+        if (mList.size() == 1) {
+            mRecommend.exitEditState();
         }
     }
 }

@@ -6,4 +6,5 @@ public class Product {
     public String title;
     public String price;
     public String num;
+    public int type;
 }

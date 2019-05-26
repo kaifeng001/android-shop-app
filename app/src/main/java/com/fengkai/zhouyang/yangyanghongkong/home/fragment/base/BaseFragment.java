@@ -21,6 +21,7 @@ public abstract class BaseFragment extends Fragment {
         initListener();
         setBackListener(view);
         initPresenter();
+        initData();
         return view;
     }
 
@@ -29,7 +30,6 @@ public abstract class BaseFragment extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
         if (getUserVisibleHint()) {
             clearSelectState();
-            initData();
         }
     }
 

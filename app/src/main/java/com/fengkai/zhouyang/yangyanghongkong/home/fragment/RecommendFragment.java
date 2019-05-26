@@ -19,7 +19,6 @@ import com.fengkai.zhouyang.yangyanghongkong.home.presenter.RecommendPresenter;
 import com.fengkai.zhouyang.yangyanghongkong.view.recycleview.DividerGridItemDecoration;
 import com.fengkai.zhouyang.yangyanghongkong.utils.LibTools;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -99,7 +98,7 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    return mPresenter.isUseBackKeyEvent();
+                    return mPresenter.isBackEditState();
                 }
                 return false;
             }
@@ -114,7 +113,7 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
 
     @Override
     public void refreshView(List<Product> list) {
-        mAdapter.setData(list);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -128,7 +127,7 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
     public void exitEditState() {
         mEdit.setVisibility(View.GONE);
         mDelete.setVisibility(View.GONE);
-        clearSelectState();
+        mAdapter.setEditState(false);
     }
 
     @Override
@@ -152,13 +151,26 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
     }
 
     @Override
+    public void removeItem(int position, List<Product> data) {
+        mAdapter.setData(data);
+        mAdapter.notifyItemRemoved(position);
+        mAdapter.notifyItemRangeChanged(position, data.size() - position);
+    }
+
+    @Override
     public void clearSelectState() {
-        mAdapter.setEditState(false);
+        if(mAdapter == null){
+            return;
+        }
+        boolean editState = mAdapter.getEditState();
+        if(editState){
+            exitEditState();
+        }
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.top_delete:
                 mPresenter.deleteSelectProduct();
                 break;

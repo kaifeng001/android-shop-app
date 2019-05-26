@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initListener();
         initPermission();
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+                mViewpager.setCurrentItem(1,false);
+//            }
+//        },500);
     }
 
     private void initListener() {

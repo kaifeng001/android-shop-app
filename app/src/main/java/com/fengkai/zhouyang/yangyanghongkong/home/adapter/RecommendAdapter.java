@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecommendAdapter extends RecyclerView.Adapter {
+    public static final int PRODUCT_TYPE = 0;
+    public static final int ADD_TYPE = 1;
+
     private List<Product> mList = new ArrayList<>();
     private OnItemClickListener mListener;
     private OnItemCheckListener mEditStateListener;
@@ -40,11 +43,11 @@ public class RecommendAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View inflate;
-        RecyclerView.ViewHolder holder;
-        if (viewType == mList.size()) {
+        RecyclerView.ViewHolder holder = null;
+        if (viewType == ADD_TYPE) {
             inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout_add, parent, false);
             holder = new AddHolder(inflate);
-        } else {
+        } else if (viewType == PRODUCT_TYPE) {
             inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
             holder = new ProductHolder(inflate);
         }
@@ -85,6 +88,8 @@ public class RecommendAdapter extends RecyclerView.Adapter {
             proHolder.mCheck.setVisibility(View.GONE);
             proHolder.itemView.setSelected(false);
             proHolder.mCheck.setChecked(false);
+        }else {
+            proHolder.mCheck.setVisibility(View.VISIBLE);
         }
 
         proHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -93,11 +98,6 @@ public class RecommendAdapter extends RecyclerView.Adapter {
             public void onClick(View v) {
                 if (mIsEditState) {
                     boolean checked = !proHolder.mCheck.isChecked();
-                    if (checked) {
-                        proHolder.mCheck.setVisibility(View.VISIBLE);
-                    } else {
-                        proHolder.mCheck.setVisibility(View.GONE);
-                    }
                     proHolder.mCheck.setChecked(checked);
                     proHolder.itemView.setSelected(checked);
                     mEditStateListener.onItemCheck(position, checked);
@@ -125,12 +125,12 @@ public class RecommendAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        return position;
+        return mList.get(position).type;
     }
 
     @Override
     public int getItemCount() {
-        return mList.size() + 1;
+        return mList.size();
     }
 
     private class ProductHolder extends RecyclerView.ViewHolder {
@@ -168,8 +168,6 @@ public class RecommendAdapter extends RecyclerView.Adapter {
     public void setData(List<Product> list) {
         mList.clear();
         mList.addAll(list);
-        notifyItemChanged(0);
-        notifyDataSetChanged();
     }
 
     public boolean getEditState() {

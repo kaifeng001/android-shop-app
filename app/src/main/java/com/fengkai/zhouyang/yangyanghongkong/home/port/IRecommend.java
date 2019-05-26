@@ -16,4 +16,6 @@ public interface IRecommend {
     boolean getEditState();
 
     void productIsEdited(boolean isCanEdited);
+
+    void removeItem(int position, List<Product> data);
 }

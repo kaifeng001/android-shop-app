@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.fengkai.zhouyang.yangyanghongkong.application.MainAplication;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.Product;
+import com.fengkai.zhouyang.yangyanghongkong.home.adapter.RecommendAdapter;
 
 import java.util.ArrayList;
 
@@ -60,17 +61,17 @@ public class ProductDbHelper extends SQLiteOpenHelper {//1.新建类继承SQLite
 
     public int deleteById(int id) {
         SQLiteDatabase db = getWritableDatabase();
-        return db.delete("product", "_id=?", new String[] { String.valueOf(id) });
+        return db.delete("product", "id=?", new String[]{String.valueOf(id)});
     }
 
-    public int updateById(Product pro,int id) {
+    public int updateById(Product pro, int id) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues value = new ContentValues();
         value.put("title", pro.title);
         value.put("price", pro.price);
         value.put("num", pro.num);
         value.put("icon", pro.icon);
-        return db.update("product", value, "_id=?", new String[] { String.valueOf(id) });
+        return db.update("product", value, "id=?", new String[]{String.valueOf(id)});
     }
 
     public ArrayList<Product> queryAllProduct() {
@@ -84,6 +85,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {//1.新建类继承SQLite
             product.price = cursor.getString(cursor.getColumnIndex("price"));
             product.num = cursor.getString(cursor.getColumnIndex("num"));
             product.icon = cursor.getString(cursor.getColumnIndex("icon"));
+            product.type = RecommendAdapter.PRODUCT_TYPE;
             list.add(product);
         }
         return list;

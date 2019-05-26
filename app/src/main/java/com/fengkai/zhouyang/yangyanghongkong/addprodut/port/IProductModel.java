@@ -8,4 +8,6 @@ public interface IProductModel {
     void insertData(Product product);
 
     List<Product> queryAllData();
+
+    void deleteProductById(int id);
 }

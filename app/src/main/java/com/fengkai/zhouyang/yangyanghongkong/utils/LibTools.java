@@ -104,7 +104,6 @@ public class LibTools {
 
     private static int mCurrentPage = -1;
 
-    //// FIXME: 19/03/19  重新获取app前台状态
     private static boolean appOnForeground = false;
 
 

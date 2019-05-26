@@ -50,7 +50,6 @@ public class Utils {
 							+ tmp;
 				}
 
-				// TODO handle non-primary volumes
 			}
 			// DownloadsProvider
 			else if (isDownloadsDocument(uri)) {

@@ -17,4 +17,9 @@ public class ProductImpl implements IProductModel {
         ArrayList<Product> products = ProductDbHelper.getInstance().queryAllProduct();
         return products;
     }
+
+    @Override
+    public void deleteProductById(int id) {
+        ProductDbHelper.getInstance().deleteById(id);
+    }
 }

@@ -20,16 +20,20 @@ import java.util.List;
 public class RecommendAdapter extends RecyclerView.Adapter {
     private List<Product> mList = new ArrayList<>();
     private OnItemClickListener mListener;
-    private OnItemClickListener mEditStateListener;
-    private OnEditStateTrueListener mEditStateChagngeTrue;
+    private OnItemCheckListener mEditStateListener;
+    private OnEditStateTrueListener mEditStateChangeTrue;
     private boolean mIsEditState;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
 
+    public interface OnItemCheckListener {
+        void onItemCheck(int position, boolean isChecked);
+    }
+
     public interface OnEditStateTrueListener {
-        void onEditStateTrue();
+        void onEditStateTrue(int position);
     }
 
     @NonNull
@@ -89,14 +93,14 @@ public class RecommendAdapter extends RecyclerView.Adapter {
             public void onClick(View v) {
                 if (mIsEditState) {
                     boolean checked = !proHolder.mCheck.isChecked();
-                    if(checked){
+                    if (checked) {
                         proHolder.mCheck.setVisibility(View.VISIBLE);
-                    }else {
+                    } else {
                         proHolder.mCheck.setVisibility(View.GONE);
                     }
                     proHolder.mCheck.setChecked(checked);
                     proHolder.itemView.setSelected(checked);
-                    mEditStateListener.onItemClick(position);
+                    mEditStateListener.onItemCheck(position, checked);
                 } else {
                     mListener.onItemClick(position);
                 }
@@ -108,7 +112,7 @@ public class RecommendAdapter extends RecyclerView.Adapter {
                 if (mIsEditState) {
                     return true;
                 }
-                mEditStateChagngeTrue.onEditStateTrue();
+                mEditStateChangeTrue.onEditStateTrue(position);
                 mIsEditState = true;
                 proHolder.mCheck.setVisibility(View.VISIBLE);
                 proHolder.mCheck.setChecked(true);
@@ -157,7 +161,7 @@ public class RecommendAdapter extends RecyclerView.Adapter {
         mListener = listener;
     }
 
-    public void setOnEditStateClickListener(OnItemClickListener listener) {
+    public void setOnEditStateClickListener(OnItemCheckListener listener) {
         mEditStateListener = listener;
     }
 
@@ -178,6 +182,6 @@ public class RecommendAdapter extends RecyclerView.Adapter {
     }
 
     public void setOnEditStateTrueListener(OnEditStateTrueListener listener) {
-        mEditStateChagngeTrue = listener;
+        mEditStateChangeTrue = listener;
     }
 }

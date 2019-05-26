@@ -23,14 +23,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class RecommendFragment extends BaseFragment implements IRecommend {
+public class RecommendFragment extends BaseFragment implements IRecommend, View.OnClickListener {
     private RecyclerView mRecycler;
     private TextView mDelete;
     private TextView mEdit;
     private RecommendAdapter mAdapter;
-    private List<Product> mList = new ArrayList<>();
     private RecommendPresenter mPresenter;
-    private List<Product> mSelectProducts = new ArrayList<>();
     private static final int REFRESH_VIEW = 0;
 
     @Override
@@ -79,18 +77,19 @@ public class RecommendFragment extends BaseFragment implements IRecommend {
                 startActivityForResult(intent, REFRESH_VIEW);
             }
         });
-        mAdapter.setOnEditStateClickListener(new RecommendAdapter.OnItemClickListener() {
+        mAdapter.setOnEditStateClickListener(new RecommendAdapter.OnItemCheckListener() {
             @Override
-            public void onItemClick(int position) {
-                //TODO 处理数据
+            public void onItemCheck(int position, boolean isChecked) {
+                mPresenter.dealCheckListener(position, isChecked);
             }
         });
         mAdapter.setOnEditStateTrueListener(new RecommendAdapter.OnEditStateTrueListener() {
             @Override
-            public void onEditStateTrue() {
-                joinEditState();
+            public void onEditStateTrue(int position) {
+                mPresenter.joinEditState(position);
             }
         });
+        mDelete.setOnClickListener(this);
     }
 
     public void setBackListener(View view) {
@@ -114,8 +113,8 @@ public class RecommendFragment extends BaseFragment implements IRecommend {
     }
 
     @Override
-    public void refreshView() {
-        mAdapter.setData(mList);
+    public void refreshView(List<Product> list) {
+        mAdapter.setData(list);
     }
 
     @Override
@@ -134,9 +133,7 @@ public class RecommendFragment extends BaseFragment implements IRecommend {
 
     @Override
     public void initRecyclerView(List<Product> products) {
-        mList.clear();
-        mList.addAll(products);
-        mAdapter.setData(mList);
+        mAdapter.setData(products);
         mRecycler.setAdapter(mAdapter);
     }
 
@@ -146,7 +143,27 @@ public class RecommendFragment extends BaseFragment implements IRecommend {
     }
 
     @Override
+    public void productIsEdited(boolean isCanEdited) {
+        if (isCanEdited) {
+            mEdit.setVisibility(View.VISIBLE);
+        } else {
+            mEdit.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
     public void clearSelectState() {
         mAdapter.setEditState(false);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.top_delete:
+                mPresenter.deleteSelectProduct();
+                break;
+            case R.id.top_edit:
+                break;
+        }
     }
 }

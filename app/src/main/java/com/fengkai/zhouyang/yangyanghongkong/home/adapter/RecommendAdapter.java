@@ -13,13 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.fengkai.zhouyang.yangyanghongkong.R;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.Product;
+import com.fengkai.zhouyang.yangyanghongkong.config.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecommendAdapter extends RecyclerView.Adapter {
-    public static final int PRODUCT_TYPE = 0;
-    public static final int ADD_TYPE = 1;
+    public static final int PRODUCT_TYPE = 1;
+    public static final int ADD_TYPE = 2;
 
     private List<Product> mList = new ArrayList<>();
     private OnItemClickListener mListener;
@@ -81,14 +82,14 @@ public class RecommendAdapter extends RecyclerView.Adapter {
         final ProductHolder proHolder = holder;
         Product product = mList.get(position);
         Glide.with(proHolder.itemView).load(product.icon).into(proHolder.mIcon);
-        proHolder.mNum.setText(product.num);
+        proHolder.mNum.setText("已卖" + product.num + "件");
         proHolder.mTitle.setText(product.title);
         proHolder.mPrice.setText(product.price);
         if (!mIsEditState) {
             proHolder.mCheck.setVisibility(View.GONE);
             proHolder.itemView.setSelected(false);
             proHolder.mCheck.setChecked(false);
-        }else {
+        } else {
             proHolder.mCheck.setVisibility(View.VISIBLE);
         }
 
@@ -106,21 +107,23 @@ public class RecommendAdapter extends RecyclerView.Adapter {
                 }
             }
         });
-        proHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if (mIsEditState) {
+        if (Config.isBusness) {
+            proHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (mIsEditState) {
+                        return true;
+                    }
+                    mEditStateChangeTrue.onEditStateTrue(position);
+                    mIsEditState = true;
+                    proHolder.mCheck.setVisibility(View.VISIBLE);
+                    proHolder.mCheck.setChecked(true);
+                    proHolder.itemView.setSelected(true);
+                    notifyDataSetChanged();
                     return true;
                 }
-                mEditStateChangeTrue.onEditStateTrue(position);
-                mIsEditState = true;
-                proHolder.mCheck.setVisibility(View.VISIBLE);
-                proHolder.mCheck.setChecked(true);
-                proHolder.itemView.setSelected(true);
-                notifyDataSetChanged();
-                return true;
-            }
-        });
+            });
+        }
     }
 
     @Override

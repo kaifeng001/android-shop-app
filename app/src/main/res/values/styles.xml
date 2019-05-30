@@ -10,4 +10,28 @@
     <style name="CheckboxStyle" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/checkbox_button_select</item>
     </style>
+
+    <style name="BottomDialogStyle" parent="@android:style/Theme.Holo.Dialog">
+        <!-- 是否有边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!--是否在悬浮Activity之上  -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!--阴影  -->
+        <item name="android:windowIsTranslucent">true</item><!--半透明-->
+        <!--背景透明-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 还可以加入一些弹出和退出的动画 (lan)-->
+    </style>
+
+    <style name="BottomDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/slide_bottom_out</item>
+    </style>
+
+    <style name="BottomDialogNullAnimation">
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@null</item>
+    </style>
 </resources>

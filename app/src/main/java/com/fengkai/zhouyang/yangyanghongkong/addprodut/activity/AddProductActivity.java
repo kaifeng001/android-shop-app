@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.fengkai.zhouyang.yangyanghongkong.R;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.port.AddProduct;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.presenter.AddProductPresenter;
+import com.fengkai.zhouyang.yangyanghongkong.utils.FileUtil;
 import com.fengkai.zhouyang.yangyanghongkong.utils.Utils;
 import com.makeramen.roundedimageview.RoundedImageView;
 
@@ -69,7 +70,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
                 finish();
                 break;
             case R.id.prod_icon:
-                photo();
+                FileUtil.goPhotoSelect(this);
             case R.id.confirm:
                 insertData();
                 break;
@@ -113,26 +114,10 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-
-            String[] proj = {MediaStore.Images.Media.DATA};
-            // 获取选中图片的路径
-            Cursor cursor = getContentResolver().query(data.getData(), proj, null, null, null);
-
-            String photo_path;
-            if (cursor != null && cursor.moveToFirst()) {
-
-                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                photo_path = cursor.getString(column_index);
-                if (photo_path == null) {
-                    mPath = Utils.getPath(getApplicationContext(), data.getData());
-                    Glide.with(this).load(mPath).into(mIconImage);
-                    Toast.makeText(this, "mPath:" + mPath, Toast.LENGTH_SHORT).show();
-                }
-            }
+        if (requestCode == FileUtil.GO_PHOTO) {
+            mPath = FileUtil.parsePhotoPath(this, data);
+            Glide.with(this).load(mPath).into(mIconImage);
         }
     }
 

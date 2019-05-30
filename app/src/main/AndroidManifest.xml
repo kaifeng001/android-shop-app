@@ -12,7 +12,7 @@
         android:name="com.fengkai.zhouyang.yangyanghongkong.application.MainAplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="${APP_NAME}"
         android:persistent="true"
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"

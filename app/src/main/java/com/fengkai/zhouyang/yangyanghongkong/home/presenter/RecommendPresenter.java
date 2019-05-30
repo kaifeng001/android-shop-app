@@ -1,10 +1,14 @@
 package com.fengkai.zhouyang.yangyanghongkong.home.presenter;
 
 
+import android.content.Context;
+
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.Product;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.ProductImpl;
+import com.fengkai.zhouyang.yangyanghongkong.config.Config;
 import com.fengkai.zhouyang.yangyanghongkong.home.adapter.RecommendAdapter;
 import com.fengkai.zhouyang.yangyanghongkong.home.port.IRecommend;
+import com.fengkai.zhouyang.yangyanghongkong.view.EditProductDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +21,7 @@ public class RecommendPresenter {
     private ProductImpl mImp;
     private List<Product> mList = new ArrayList<>();
     private HashMap<Integer, Product> mSelects = new HashMap<>();
-    private List<Product> mSelectProducts = new ArrayList<>();
+    private EditProductDialog mEditDialog;
 
     public RecommendPresenter(IRecommend recommend) {
         mImp = new ProductImpl();
@@ -28,10 +32,11 @@ public class RecommendPresenter {
         List<Product> products = mImp.queryAllData();
         mList.clear();
         mList.addAll(products);
-
-        Product addType = new Product();
-        addType.type = RecommendAdapter.ADD_TYPE;
-        mList.add(addType);
+        if (Config.isBusness){
+            Product addType = new Product();
+            addType.type = RecommendAdapter.ADD_TYPE;
+            mList.add(addType);
+        }
         mRecommend.initRecyclerView(mList);
     }
 
@@ -78,5 +83,21 @@ public class RecommendPresenter {
         if (mList.size() == 1) {
             mRecommend.exitEditState();
         }
+    }
+
+    public void dealEditCLick(Context context, EditProductDialog.OnIconSelectClickListener listener) {
+        Iterator<Map.Entry<Integer, Product>> iterator = mSelects.entrySet().iterator();
+        if (iterator.hasNext()) {
+            Map.Entry<Integer, Product> next = iterator.next();
+            Product product = next.getValue();
+            mEditDialog = new EditProductDialog(context, product);
+            mEditDialog.setIconSelectListener(listener);
+            mEditDialog.show();
+        }
+
+    }
+
+    public void showSelectIconEdit(String path) {
+        mEditDialog.showSelectIcon(path);
     }
 }

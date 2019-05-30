@@ -1,13 +1,18 @@
 package com.fengkai.zhouyang.yangyanghongkong.home.fragment;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.os.Build;
+import android.provider.MediaStore;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.fengkai.zhouyang.yangyanghongkong.R;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.Product;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.activity.AddProductActivity;
@@ -16,6 +21,9 @@ import com.fengkai.zhouyang.yangyanghongkong.home.adapter.RecommendAdapter;
 import com.fengkai.zhouyang.yangyanghongkong.home.fragment.base.BaseFragment;
 import com.fengkai.zhouyang.yangyanghongkong.home.port.IRecommend;
 import com.fengkai.zhouyang.yangyanghongkong.home.presenter.RecommendPresenter;
+import com.fengkai.zhouyang.yangyanghongkong.utils.FileUtil;
+import com.fengkai.zhouyang.yangyanghongkong.utils.Utils;
+import com.fengkai.zhouyang.yangyanghongkong.view.EditProductDialog;
 import com.fengkai.zhouyang.yangyanghongkong.view.recycleview.DividerGridItemDecoration;
 import com.fengkai.zhouyang.yangyanghongkong.utils.LibTools;
 
@@ -28,7 +36,10 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
     private TextView mEdit;
     private RecommendAdapter mAdapter;
     private RecommendPresenter mPresenter;
-    private static final int REFRESH_VIEW = 0;
+    private String mPath;
+
+    private static final int GO_DETAIL = 0;
+
 
     @Override
     public int setLayoutId() {
@@ -67,13 +78,12 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
             @Override
             public void onItemClick(int position) {
                 Intent intent;
-                int itemCount = mAdapter.getItemCount();
-                if (position == itemCount - 1) {
+                if (mAdapter.getItemViewType(position) == RecommendAdapter.ADD_TYPE) {
                     intent = new Intent(getContext(), AddProductActivity.class);
                 } else {
                     intent = new Intent(getContext(), ProductDetailsActivity.class);
                 }
-                startActivityForResult(intent, REFRESH_VIEW);
+                startActivityForResult(intent, GO_DETAIL);
             }
         });
         mAdapter.setOnEditStateClickListener(new RecommendAdapter.OnItemCheckListener() {
@@ -89,6 +99,7 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
             }
         });
         mDelete.setOnClickListener(this);
+        mEdit.setOnClickListener(this);
     }
 
     public void setBackListener(View view) {
@@ -108,7 +119,12 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        initData();
+        if (requestCode == FileUtil.GO_PHOTO) {
+            mPath = FileUtil.parsePhotoPath(getContext(), data);
+            mPresenter.showSelectIconEdit(mPath);
+        } else if (requestCode == GO_DETAIL) {
+            initData();
+        }
     }
 
     @Override
@@ -159,11 +175,11 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
 
     @Override
     public void clearSelectState() {
-        if(mAdapter == null){
+        if (mAdapter == null) {
             return;
         }
         boolean editState = mAdapter.getEditState();
-        if(editState){
+        if (editState) {
             exitEditState();
         }
     }
@@ -175,6 +191,12 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
                 mPresenter.deleteSelectProduct();
                 break;
             case R.id.top_edit:
+                mPresenter.dealEditCLick(getContext(), new EditProductDialog.OnIconSelectClickListener() {
+                    @Override
+                    public void onIconSelectClick() {
+                        FileUtil.goPhotoSelect(RecommendFragment.this);
+                    }
+                });
                 break;
         }
     }

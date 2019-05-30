@@ -1,16 +1,22 @@
 package com.fengkai.zhouyang.yangyanghongkong.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.widget.Toast;
 
 
+import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.bumptech.glide.Glide;
 import com.fengkai.zhouyang.yangyanghongkong.application.MainAplication;
 
 import java.io.BufferedInputStream;
@@ -29,6 +35,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class FileUtil {
+    public static final int GO_PHOTO = 2;
+
     /**
      * 判断sd卡是否存在
      *
@@ -69,7 +77,7 @@ public class FileUtil {
      * @param filepath
      */
     public static String createSDCardDir(String filepath) {
-        if(existSDCard()){
+        if (existSDCard()) {
             File sdcardDir = Environment.getExternalStorageDirectory();
             // 得到一个路径，内容是sdcard的文件夹路径和名字
             String path = sdcardDir.getPath() + "/" + filepath;
@@ -79,42 +87,44 @@ public class FileUtil {
                 path1.mkdirs();
             }
             return path;
-        }else{
+        } else {
             return "";
         }
     }
 
     /**
      * 外部存储卡App私有目录的file根目录
+     *
      * @return 返回上述目录，sdcard不存在或者有异常的话返回""。
      */
     public static String getSDCardFilePathOrEmpty() {
-        if(existSDCard()){
+        if (existSDCard()) {
             File sdcardDir = MainAplication.getInstance().getExternalFilesDir(null);
-            if( null != sdcardDir ) {
+            if (null != sdcardDir) {
                 return sdcardDir.getAbsolutePath();
             } else {
                 return "";
             }
-        }else{
+        } else {
             return "";
         }
     }
 
     /**
      * 外部存储卡App私有目录的file根目录
+     *
      * @return 返回上述目录，sdcard不存在或者有异常的话返回data下的file目录
      */
     public static String getSDCardFilePath() {
-        if(existSDCard()){
+        if (existSDCard()) {
             File sdcardDir = MainAplication.getInstance().getExternalFilesDir(null);
-            if( null != sdcardDir ) {
+            if (null != sdcardDir) {
                 return sdcardDir.getAbsolutePath();
             } else {
                 File cacheDir = MainAplication.getInstance().getFilesDir();
                 return cacheDir.getAbsolutePath();
             }
-        }else{
+        } else {
             File cacheDir = MainAplication.getInstance().getFilesDir();
             return cacheDir.getAbsolutePath();
         }
@@ -122,18 +132,19 @@ public class FileUtil {
 
     /**
      * 获取sdcard卡上App私有目录的file目录
+     *
      * @return 返回上述目录，sdcard不存在或者有异常返回app data的file目录
      */
     public static File getSDCardDirFile() {
-        if(existSDCard()){
+        if (existSDCard()) {
             File sdcardDir = MainAplication.getInstance().getExternalFilesDir(null);
-            if( null != sdcardDir ) {
+            if (null != sdcardDir) {
                 return sdcardDir;
             } else {
                 File cacheDir = MainAplication.getInstance().getFilesDir();
                 return cacheDir;
             }
-        }else{
+        } else {
             File cacheDir = MainAplication.getInstance().getFilesDir();
             return cacheDir;
         }
@@ -141,35 +152,37 @@ public class FileUtil {
 
     /**
      * 外部存储卡App私有目录的cache根目录
+     *
      * @return 返回上述目录，sdcard不存在或者有异常的话返回""。
      */
     public static String getSDCardCachePathOrEmpty() {
-        if(existSDCard()){
+        if (existSDCard()) {
             File sdcardDir = MainAplication.getInstance().getExternalCacheDir();
-            if( null != sdcardDir ) {
+            if (null != sdcardDir) {
                 return sdcardDir.getAbsolutePath();
             } else {
                 return "";
             }
-        }else{
+        } else {
             return "";
         }
     }
 
     /**
      * 外部存储卡App私有目录的cache根目录
+     *
      * @return 返回上述目录，sdcard不存在或者有异常的话返回data下的cache目录
      */
     public static String getSDCardCachePath() {
-        if(existSDCard()){
+        if (existSDCard()) {
             File sdcardDir = MainAplication.getInstance().getExternalCacheDir();
-            if( null != sdcardDir ) {
+            if (null != sdcardDir) {
                 return sdcardDir.getAbsolutePath();
             } else {
                 File cacheDir = MainAplication.getInstance().getCacheDir();
                 return cacheDir.getAbsolutePath();
             }
-        }else{
+        } else {
             File cacheDir = MainAplication.getInstance().getCacheDir();
             return cacheDir.getAbsolutePath();
         }
@@ -178,18 +191,19 @@ public class FileUtil {
 
     /**
      * 获取sdcard卡上App私有目录的cache目录
+     *
      * @return 返回上述目录，sdcard不存在或者有异常返回app data目录的cache目录
      */
     public static File getSDCardCacheFile() {
-        if(existSDCard()){
+        if (existSDCard()) {
             File sdcardDir = MainAplication.getInstance().getExternalCacheDir();
-            if( null != sdcardDir ) {
+            if (null != sdcardDir) {
                 return sdcardDir;
             } else {
                 File cacheDir = MainAplication.getInstance().getCacheDir();
                 return cacheDir;
             }
-        }else{
+        } else {
             File cacheDir = MainAplication.getInstance().getCacheDir();
             return cacheDir;
         }
@@ -245,7 +259,6 @@ public class FileUtil {
      *
      * @param filename 文件名称
      * @return
-     * @throws Exception
      */
     public static String readFile(String path, String filename) {
         FileInputStream inStream = null;
@@ -495,6 +508,58 @@ public class FileUtil {
             }
         }
         path = temp.toString();
+        return path;
+    }
+
+    public static void goPhotoSelect(Activity activity) {
+        String device = Build.MANUFACTURER;
+        Intent innerIntent = new Intent(); // "android.intent.action.GET_CONTENT"
+        if (device.equals("Xiaomi")) {//小米系统采用19及以上的api，进入的是文件管理，而不是图片库
+            innerIntent.setAction(Intent.ACTION_GET_CONTENT);
+        } else {
+            if (Build.VERSION.SDK_INT < 19) {
+                innerIntent.setAction(Intent.ACTION_GET_CONTENT);
+            } else {
+                innerIntent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+            }
+        }
+        innerIntent.setType("image/*");
+        Intent wrapperIntent = Intent.createChooser(innerIntent, "11");
+        activity.startActivityForResult(wrapperIntent, GO_PHOTO);
+    }
+
+    public static void goPhotoSelect(Fragment fragment) {
+        String device = Build.MANUFACTURER;
+        Intent innerIntent = new Intent(); // "android.intent.action.GET_CONTENT"
+        if (device.equals("Xiaomi")) {//小米系统采用19及以上的api，进入的是文件管理，而不是图片库
+            innerIntent.setAction(Intent.ACTION_GET_CONTENT);
+        } else {
+            if (Build.VERSION.SDK_INT < 19) {
+                innerIntent.setAction(Intent.ACTION_GET_CONTENT);
+            } else {
+                innerIntent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+            }
+        }
+        innerIntent.setType("image/*");
+        Intent wrapperIntent = Intent.createChooser(innerIntent, "11");
+        fragment.startActivityForResult(wrapperIntent, GO_PHOTO);
+    }
+
+    public static String parsePhotoPath(Context context, Intent intent) {
+        String path = null;
+        String[] proj = {MediaStore.Images.Media.DATA};
+        // 获取选中图片的路径
+        Cursor cursor = context.getContentResolver().query(intent.getData(), proj, null, null, null);
+
+        String photo_path;
+        if (cursor != null && cursor.moveToFirst()) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            photo_path = cursor.getString(column_index);
+            if (photo_path == null) {
+                path = Utils.getPath(context, intent.getData());
+            }
+        }
+        Toast.makeText(context, "mPath:" + path, Toast.LENGTH_SHORT).show();
         return path;
     }
 }

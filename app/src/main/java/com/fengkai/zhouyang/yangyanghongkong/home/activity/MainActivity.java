@@ -40,12 +40,8 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initListener();
         initPermission();
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-                mViewpager.setCurrentItem(1,false);
-//            }
-//        },500);
+        //进来就选择推荐
+        mViewpager.setCurrentItem(1, false);
     }
 
     private void initListener() {
@@ -103,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initPermission() {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             // 检查该权限是否已经获取
             int i = ContextCompat.checkSelfPermission(this, permissions[0]);
             if (i == PackageManager.PERMISSION_GRANTED) {

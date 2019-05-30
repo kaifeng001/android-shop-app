@@ -17,9 +17,9 @@ android {
         }
 
         manifestPlaceholders = [
-                JPUSH_PKGNAME : applicationId,
+                JPUSH_PKGNAME: applicationId,
                 JPUSH_APPKEY : "e4d3bf0e9aa6df645d8d0436", //JPush 上注册的包名对应的 Appkey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }
     buildTypes {
@@ -32,6 +32,31 @@ android {
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
+    }
+
+    buildTypes {
+
+        release {
+            minifyEnabled false   //是否代码混淆
+            multiDexEnabled true //防止方法数量超过65536导致错误
+        }
+        debug {
+            minifyEnabled false
+            multiDexEnabled true
+        }
+    }
+    flavorDimensions("environment")
+    productFlavors {
+        user {
+            dimension "environment"
+            manifestPlaceholders = [
+                    APP_NAME: "杨杨过港用户版"]
+        }
+        business {
+            dimension "environment"
+            manifestPlaceholders = [
+                    APP_NAME: "杨杨过港商户版"]
+        }
     }
 }
 

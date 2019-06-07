@@ -121,6 +121,9 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == FileUtil.GO_PHOTO) {
             mPath = FileUtil.parsePhotoPath(getContext(), data);
+            if (mPath == null){
+                return;
+            }
             mPresenter.showSelectIconEdit(mPath);
         } else if (requestCode == GO_DETAIL) {
             initData();

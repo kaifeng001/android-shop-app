@@ -6,7 +6,8 @@ import com.fengkai.zhouyang.yangyanghongkong.addprodut.port.AddProduct;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.ProductImpl;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.Product;
 import com.fengkai.zhouyang.yangyanghongkong.application.MainAplication;
-import com.fengkai.zhouyang.yangyanghongkong.db.ProductDbHelper;
+import com.fengkai.zhouyang.yangyanghongkong.db.DbHelper;
+import com.fengkai.zhouyang.yangyanghongkong.db.ProductDatabase;
 
 public class AddProductPresenter {
     private ProductImpl mBiz;
@@ -25,6 +26,6 @@ public class AddProductPresenter {
         product.num = mView.getProductNum();
         mBiz.insertData(product);
         Toast.makeText(MainAplication.getInstance().getApplicationContext(), "数据库个数" +
-                ProductDbHelper.getInstance().queryCount(), Toast.LENGTH_SHORT).show();
+                ProductDatabase.queryCount(), Toast.LENGTH_SHORT).show();
     }
 }

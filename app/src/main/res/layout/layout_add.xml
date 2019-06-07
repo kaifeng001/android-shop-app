@@ -36,7 +36,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="设置商品图片"
-            android:textColor="@drawable/text_normal_select"
+            android:textColor="@color/text_normal_select"
             android:textSize="15sp" />
 
         <com.makeramen.roundedimageview.RoundedImageView
@@ -166,5 +166,5 @@
         android:layout_marginRight="20dp"
         android:padding="5dp"
         android:text="确认"
-        android:textColor="@drawable/text_normal_select" />
+        android:textColor="@color/text_normal_select" />
 </LinearLayout>

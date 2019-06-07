@@ -44,6 +44,11 @@
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
             android:screenOrientation="portrait"></activity>
 
+        <activity
+            android:name=".home.activity.CustomerActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
+            android:screenOrientation="portrait"></activity>
+        <!-- 极光推送 -->
         <!-- Since JCore2.0.0 Required SDK核心功能-->
         <!-- 这个Service继承JCommonService即可，可以在更多手机平台上使得推送通道保持的更稳定 -->
         <service
@@ -81,6 +86,8 @@
                 <category android:name="com.fengkai.zhouyang.yangyanghongkong" />
             </intent-filter>
         </receiver>
+        <!-- 极光推送 -->
+
     </application>
 
 </manifest>

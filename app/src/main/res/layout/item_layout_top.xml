@@ -11,7 +11,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="15dp"
         android:text="删除"
-        android:textColor="@drawable/text_normal_select"
+        android:textColor="@color/text_normal_select"
         android:textSize="12sp"
         android:visibility="gone" />
 
@@ -49,7 +49,7 @@
         android:gravity="center_vertical"
         android:paddingRight="15dp"
         android:text="编辑"
-        android:textColor="@drawable/text_normal_select"
+        android:textColor="@color/text_normal_select"
         android:textSize="12sp"
         android:visibility="gone" />
 </RelativeLayout>

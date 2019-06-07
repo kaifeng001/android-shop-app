@@ -40,8 +40,6 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initListener();
         initPermission();
-        //进来就选择推荐
-        mViewpager.setCurrentItem(1, false);
     }
 
     private void initListener() {

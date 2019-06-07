@@ -23,6 +23,6 @@ public class LaunchActivity extends AppCompatActivity {
                 LaunchActivity.this.startActivity(intent);
                 finish();
             }
-        }, 2000);
+        }, 0);
     }
 }

@@ -549,6 +549,9 @@ public class FileUtil {
         String path = null;
         String[] proj = {MediaStore.Images.Media.DATA};
         // 获取选中图片的路径
+        if (intent == null){
+            return path;
+        }
         Cursor cursor = context.getContentResolver().query(intent.getData(), proj, null, null, null);
 
         String photo_path;

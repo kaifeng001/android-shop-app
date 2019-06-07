@@ -1,7 +1,8 @@
 package com.fengkai.zhouyang.yangyanghongkong.addprodut.model;
 
-import com.fengkai.zhouyang.yangyanghongkong.db.ProductDbHelper;
+import com.fengkai.zhouyang.yangyanghongkong.db.DbHelper;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.port.IProductModel;
+import com.fengkai.zhouyang.yangyanghongkong.db.ProductDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,17 +10,17 @@ import java.util.List;
 public class ProductImpl implements IProductModel {
     @Override
     public void insertData(Product product) {
-        ProductDbHelper.getInstance().insertDb(product);
+        ProductDatabase.insertDb(product);
     }
 
     @Override
     public List<Product> queryAllData() {
-        ArrayList<Product> products = ProductDbHelper.getInstance().queryAllProduct();
+        ArrayList<Product> products = ProductDatabase.queryAllProduct();
         return products;
     }
 
     @Override
     public void deleteProductById(int id) {
-        ProductDbHelper.getInstance().deleteById(id);
+        ProductDatabase.deleteById(id);
     }
 }

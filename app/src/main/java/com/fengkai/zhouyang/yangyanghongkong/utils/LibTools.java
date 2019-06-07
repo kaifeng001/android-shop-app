@@ -1,5 +1,6 @@
 package com.fengkai.zhouyang.yangyanghongkong.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
@@ -33,6 +34,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fengkai.zhouyang.yangyanghongkong.application.MainAplication;
 
@@ -1357,7 +1359,6 @@ public class LibTools {
      * @param sourceTime 时间区间,半闭合,如[10:00-20:00)
      * @param curTime    需要判断的时间 如10:00
      * @return
-     * @throws IllegalArgumentException
      */
     public static boolean isInTime(String sourceTime, String curTime) {
         if (sourceTime == null || !sourceTime.contains("-") || !sourceTime.contains(":")) {
@@ -1455,5 +1456,52 @@ public class LibTools {
      */
     public static boolean isSpecialEntity(String entityId) {
         return "9".equals(entityId) || "24".equals(entityId) || "201".equals(entityId);
+    }
+
+    @SuppressLint("WrongConstant")
+    public static void openWeiXinScan(Context context) {
+        try {
+            Intent intent = new Intent();
+            intent.setComponent(new ComponentName("com.tencent.mm", "com.tencent.mm.ui.LauncherUI"));
+            intent.putExtra("LauncherUI.From.Scaner.Shortcut", true);
+            intent.setFlags(335544320);
+            intent.setAction("android.intent.action.VIEW");
+            context.startActivity(intent);
+        } catch (Exception e) {
+            Toast.makeText(context, "微信扫一扫打开失败", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void openAliPayScan(Context context) {
+        try {
+            Uri uri = Uri.parse("alipayqr://platformapi/startapp?saId=10000007");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            context.startActivity(intent);
+        } catch (Exception e) {
+            Toast.makeText(context, "支付宝扫一扫打开失败", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void openWeiXinPay(Context context) {
+        try {
+            String mPackageName="com.tencent.mm";
+            String mActivityName="com.tencent.mm.plugin.offline.ui.WalletOfflineCoinPurseUI";
+            Intent intent=new Intent();
+            intent.setComponent(new ComponentName(mPackageName,mActivityName));
+            intent.setAction("android.intent.action.VIEW");
+            context.startActivity(intent);
+        } catch (Exception e) {
+            Toast.makeText(context, "微信付款码打开失败", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public static void openAliPayPay(Context context) {
+        try {
+            Uri uri = Uri.parse("alipayqr://platformapi/startapp?saId=20000056");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            context.startActivity(intent);
+        } catch (Exception e) {
+            Toast.makeText(context, "支付宝付款码打开失败", Toast.LENGTH_SHORT).show();
+        }
     }
 }

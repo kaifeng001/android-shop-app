@@ -12,7 +12,8 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.fengkai.zhouyang.yangyanghongkong.R;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.Product;
-import com.fengkai.zhouyang.yangyanghongkong.db.ProductDbHelper;
+import com.fengkai.zhouyang.yangyanghongkong.db.DbHelper;
+import com.fengkai.zhouyang.yangyanghongkong.db.ProductDatabase;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 public class EditProductDialog extends BottomDialog {
@@ -95,7 +96,7 @@ public class EditProductDialog extends BottomDialog {
             Toast.makeText(mContext, "件数不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
-        ProductDbHelper.getInstance().updateById(product, mId);
+        ProductDatabase.updateById(product, mId);
         Toast.makeText(mContext, "更新数据成功", Toast.LENGTH_SHORT).show();
         dismiss();
     }

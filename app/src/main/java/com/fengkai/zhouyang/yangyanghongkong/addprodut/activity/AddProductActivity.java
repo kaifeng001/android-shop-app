@@ -95,28 +95,14 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         finish();
     }
 
-    public void photo() {
-        String device = Build.MANUFACTURER;
-        Intent innerIntent = new Intent(); // "android.intent.action.GET_CONTENT"
-        if (device.equals("Xiaomi")) {//小米系统采用19及以上的api，进入的是文件管理，而不是图片库
-            innerIntent.setAction(Intent.ACTION_GET_CONTENT);
-        } else {
-            if (Build.VERSION.SDK_INT < 19) {
-                innerIntent.setAction(Intent.ACTION_GET_CONTENT);
-            } else {
-                innerIntent.setAction(Intent.ACTION_OPEN_DOCUMENT);
-            }
-        }
-        innerIntent.setType("image/*");
-        Intent wrapperIntent = Intent.createChooser(innerIntent, "11");
-        this.startActivityForResult(wrapperIntent, 1);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == FileUtil.GO_PHOTO) {
             mPath = FileUtil.parsePhotoPath(this, data);
+            if (mPath == null){
+                return;
+            }
             Glide.with(this).load(mPath).into(mIconImage);
         }
     }

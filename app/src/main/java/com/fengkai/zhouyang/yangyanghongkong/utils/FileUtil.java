@@ -1,6 +1,7 @@
 package com.fengkai.zhouyang.yangyanghongkong.utils;
 
 import android.app.Activity;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -549,7 +550,7 @@ public class FileUtil {
         String path = null;
         String[] proj = {MediaStore.Images.Media.DATA};
         // 获取选中图片的路径
-        if (intent == null){
+        if (intent == null) {
             return path;
         }
         Cursor cursor = context.getContentResolver().query(intent.getData(), proj, null, null, null);
@@ -564,5 +565,11 @@ public class FileUtil {
         }
         Toast.makeText(context, "mPath:" + path, Toast.LENGTH_SHORT).show();
         return path;
+    }
+
+    public static void CopyToClipboard(Context context, String text) {
+        ClipboardManager clip = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        //clip.getText(); // 粘贴
+        clip.setText(text); // 复制
     }
 }

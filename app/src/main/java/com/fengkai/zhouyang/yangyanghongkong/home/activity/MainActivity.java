@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void initPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            // 检查该权限是否已经获取
             int i = ContextCompat.checkSelfPermission(this, permissions[0]);
             if (i == PackageManager.PERMISSION_GRANTED) {
                 return;

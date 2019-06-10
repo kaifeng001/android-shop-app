@@ -1,18 +1,13 @@
 package com.fengkai.zhouyang.yangyanghongkong.home.fragment;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.os.Build;
-import android.provider.MediaStore;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.fengkai.zhouyang.yangyanghongkong.R;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.Product;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.activity.AddProductActivity;
@@ -22,7 +17,6 @@ import com.fengkai.zhouyang.yangyanghongkong.home.fragment.base.BaseFragment;
 import com.fengkai.zhouyang.yangyanghongkong.home.port.IRecommend;
 import com.fengkai.zhouyang.yangyanghongkong.home.presenter.RecommendPresenter;
 import com.fengkai.zhouyang.yangyanghongkong.utils.FileUtil;
-import com.fengkai.zhouyang.yangyanghongkong.utils.Utils;
 import com.fengkai.zhouyang.yangyanghongkong.view.EditProductDialog;
 import com.fengkai.zhouyang.yangyanghongkong.view.recycleview.DividerGridItemDecoration;
 import com.fengkai.zhouyang.yangyanghongkong.utils.LibTools;
@@ -64,7 +58,8 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
     @Override
     public void initTitle(View view) {
         mDelete = view.findViewById(R.id.top_delete);
-        mEdit = view.findViewById(R.id.top_edit);
+        mEdit = view.findViewById(R.id.top_right);
+        mEdit.setText("编辑");
     }
 
     @Override
@@ -121,7 +116,7 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == FileUtil.GO_PHOTO) {
             mPath = FileUtil.parsePhotoPath(getContext(), data);
-            if (mPath == null){
+            if (mPath == null) {
                 return;
             }
             mPresenter.showSelectIconEdit(mPath);
@@ -193,7 +188,7 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
             case R.id.top_delete:
                 mPresenter.deleteSelectProduct();
                 break;
-            case R.id.top_edit:
+            case R.id.top_right:
                 mPresenter.dealEditCLick(getContext(), new EditProductDialog.OnIconSelectClickListener() {
                     @Override
                     public void onIconSelectClick() {

@@ -45,7 +45,12 @@
             android:screenOrientation="portrait"></activity>
 
         <activity
-            android:name=".home.activity.CustomerActivity"
+            android:name=".customer.acitivity.CustomerActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".customer.acitivity.AddCustomerActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
             android:screenOrientation="portrait"></activity>
         <!-- 极光推送 -->

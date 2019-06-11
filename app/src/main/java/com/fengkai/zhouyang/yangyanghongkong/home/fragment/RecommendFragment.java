@@ -12,6 +12,7 @@ import com.fengkai.zhouyang.yangyanghongkong.R;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.Product;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.activity.AddProductActivity;
 import com.fengkai.zhouyang.yangyanghongkong.activity.ProductDetailsActivity;
+import com.fengkai.zhouyang.yangyanghongkong.constant.Constant;
 import com.fengkai.zhouyang.yangyanghongkong.home.adapter.RecommendAdapter;
 import com.fengkai.zhouyang.yangyanghongkong.home.fragment.base.BaseFragment;
 import com.fengkai.zhouyang.yangyanghongkong.home.port.IRecommend;
@@ -31,9 +32,17 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
     private RecommendAdapter mAdapter;
     private RecommendPresenter mPresenter;
     private String mPath;
+    private int mType = Constant.ALL;
 
     private static final int GO_DETAIL = 0;
 
+    public RecommendFragment(int type) {
+        mType = type;
+    }
+
+    public RecommendFragment() {
+
+    }
 
     @Override
     public int setLayoutId() {
@@ -57,9 +66,14 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
 
     @Override
     public void initTitle(View view) {
-        mDelete = view.findViewById(R.id.top_delete);
-        mEdit = view.findViewById(R.id.top_right);
-        mEdit.setText("编辑");
+        if (mType == Constant.ALL) {
+            mDelete = view.findViewById(R.id.top_delete);
+            mEdit = view.findViewById(R.id.top_right);
+            mEdit.setText("编辑");
+        } else {
+            View topView = view.findViewById(R.id.recommend_top);
+            topView.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -81,6 +95,9 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
                 startActivityForResult(intent, GO_DETAIL);
             }
         });
+        if (mType != Constant.ALL) {
+            return;
+        }
         mAdapter.setOnEditStateClickListener(new RecommendAdapter.OnItemCheckListener() {
             @Override
             public void onItemCheck(int position, boolean isChecked) {
@@ -197,5 +214,10 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
                 });
                 break;
         }
+    }
+
+    @Override
+    public int getType() {
+        return mType;
     }
 }

@@ -6,6 +6,7 @@ import android.content.Context;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.Product;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.ProductImpl;
 import com.fengkai.zhouyang.yangyanghongkong.config.Config;
+import com.fengkai.zhouyang.yangyanghongkong.constant.Constant;
 import com.fengkai.zhouyang.yangyanghongkong.home.adapter.RecommendAdapter;
 import com.fengkai.zhouyang.yangyanghongkong.home.port.IRecommend;
 import com.fengkai.zhouyang.yangyanghongkong.view.EditProductDialog;
@@ -32,7 +33,7 @@ public class RecommendPresenter {
         List<Product> products = mImp.queryAllData();
         mList.clear();
         mList.addAll(products);
-        if (Config.isBusness){
+        if (Config.isBusness && mRecommend.getType() == Constant.ALL) {
             Product addType = new Product();
             addType.type = RecommendAdapter.ADD_TYPE;
             mList.add(addType);

@@ -5,7 +5,9 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <include layout="@layout/item_layout_top"></include>
+    <include
+        android:id="@+id/recommend_top"
+        layout="@layout/item_layout_top"></include>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recommend_list"

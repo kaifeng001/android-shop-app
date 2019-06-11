@@ -18,4 +18,6 @@ public interface IRecommend {
     void productIsEdited(boolean isCanEdited);
 
     void removeItem(int position, List<Product> data);
+
+    int getType();
 }

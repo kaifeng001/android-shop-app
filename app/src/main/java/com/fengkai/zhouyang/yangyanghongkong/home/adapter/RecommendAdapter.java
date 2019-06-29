@@ -1,5 +1,11 @@
 package com.fengkai.zhouyang.yangyanghongkong.home.adapter;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +14,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.fengkai.zhouyang.yangyanghongkong.R;
+import com.fengkai.zhouyang.yangyanghongkong.activity.ProductDetailsActivity;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.Product;
 import com.fengkai.zhouyang.yangyanghongkong.config.Config;
 
@@ -27,6 +35,7 @@ public class RecommendAdapter extends RecyclerView.Adapter {
     private OnItemCheckListener mEditStateListener;
     private OnEditStateTrueListener mEditStateChangeTrue;
     private boolean mIsEditState;
+    private Activity mActivity;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -38,6 +47,10 @@ public class RecommendAdapter extends RecyclerView.Adapter {
 
     public interface OnEditStateTrueListener {
         void onEditStateTrue(int position);
+    }
+
+    public RecommendAdapter(Activity activity) {
+        mActivity = activity;
     }
 
     @NonNull
@@ -78,9 +91,17 @@ public class RecommendAdapter extends RecyclerView.Adapter {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void share(View view, String iconPath) {
+        Intent intent = new Intent(mActivity, ProductDetailsActivity.class);
+        intent.putExtra("icon", iconPath);
+        Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(mActivity,view,"share").toBundle();
+        mActivity.startActivity(intent, bundle);
+    }
+
     private void binderProduct(@NonNull ProductHolder holder, final int position) {
         final ProductHolder proHolder = holder;
-        Product product = mList.get(position);
+        final Product product = mList.get(position);
         Glide.with(proHolder.itemView).load(product.icon).into(proHolder.mIcon);
         proHolder.mNum.setText("已卖" + product.num + "件");
         proHolder.mTitle.setText(product.title);
@@ -92,7 +113,14 @@ public class RecommendAdapter extends RecyclerView.Adapter {
         } else {
             proHolder.mCheck.setVisibility(View.VISIBLE);
         }
-
+        proHolder.mIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    share(proHolder.mIcon, product.icon);
+                }
+            }
+        });
         proHolder.itemView.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -111,7 +139,7 @@ public class RecommendAdapter extends RecyclerView.Adapter {
             proHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if (mEditStateChangeTrue == null){
+                    if (mEditStateChangeTrue == null) {
                         return true;
                     }
                     if (mIsEditState) {

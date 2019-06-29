@@ -61,7 +61,7 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         mRecycler.setLayoutManager(layoutManager);
         mRecycler.addItemDecoration(new DividerGridItemDecoration(getContext(), LibTools.dp2px(2), R.color.divider));
-        mAdapter = new RecommendAdapter();
+        mAdapter = new RecommendAdapter(getActivity());
     }
 
     @Override

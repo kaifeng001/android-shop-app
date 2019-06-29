@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecommendAdapter extends RecyclerView.Adapter {
-    public static final int PRODUCT_TYPE = 1;
-    public static final int ADD_TYPE = 2;
+    public static final int PRODUCT_TYPE = 0;
+    public static final int ADD_TYPE = 1;
 
     private List<Product> mList = new ArrayList<>();
     private OnItemClickListener mListener;
@@ -111,6 +111,9 @@ public class RecommendAdapter extends RecyclerView.Adapter {
             proHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
+                    if (mEditStateChangeTrue == null){
+                        return true;
+                    }
                     if (mIsEditState) {
                         return true;
                     }

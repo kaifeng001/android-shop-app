@@ -27,7 +27,7 @@ public class EditProductDialog extends BottomDialog {
     private EditText mTitle;
     private EditText mNum;
     private String mPath;
-    private int mId;
+    private long mId;
 
     public EditProductDialog(@NonNull Context context, Product product) {
         super(context);
@@ -102,7 +102,7 @@ public class EditProductDialog extends BottomDialog {
     }
 
     private boolean setTitle(Product product, String hint, String text) {
-        if (TextUtils.isEmpty(hint)){
+        if (!TextUtils.isEmpty(text)){
             if (TextUtils.isEmpty(text)){
                 return true;
             }else {
@@ -115,7 +115,7 @@ public class EditProductDialog extends BottomDialog {
     }
 
     private boolean setPrice(Product product, String hint, String text) {
-        if (TextUtils.isEmpty(hint)){
+        if (!TextUtils.isEmpty(text)){
             if (TextUtils.isEmpty(text)){
                 return true;
             }else {
@@ -128,7 +128,7 @@ public class EditProductDialog extends BottomDialog {
     }
 
     private boolean setNum(Product product, String hint, String text) {
-        if (TextUtils.isEmpty(hint)){
+        if (!TextUtils.isEmpty(text)){
             if (TextUtils.isEmpty(text)){
                 return true;
             }else {

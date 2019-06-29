@@ -9,5 +9,5 @@ public interface IProductModel {
 
     List<Product> queryAllData();
 
-    void deleteProductById(int id);
+    void deleteProductById(long id);
 }

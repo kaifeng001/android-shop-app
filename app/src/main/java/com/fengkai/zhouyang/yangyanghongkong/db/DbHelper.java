@@ -36,7 +36,7 @@ public class DbHelper extends SQLiteOpenHelper {//1.新建类继承SQLiteOpenHel
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL(PRODUCT);
+//        sqLiteDatabase.execSQL(PRODUCT);
         sqLiteDatabase.execSQL(CUSTOMER);
         sqLiteDatabase.execSQL(ODERS);
         Toast.makeText(context, "Create succeeded", Toast.LENGTH_SHORT).show();
@@ -51,7 +51,7 @@ public class DbHelper extends SQLiteOpenHelper {//1.新建类继承SQLiteOpenHel
         if (mInstance == null) {
             synchronized (DbHelper.class) {
                 if (mInstance == null) {
-                    mInstance = new DbHelper(MainAplication.getInstance().getApplicationContext(), "yangyangProduct.db", null, 1);
+                    mInstance = new DbHelper(MainAplication.getInstance().getApplicationContext(), "yangyangProduct1.db", null, 1);
                 }
             }
         }

@@ -1,6 +1,5 @@
 package com.fengkai.zhouyang.yangyanghongkong.addprodut.model;
 
-import com.fengkai.zhouyang.yangyanghongkong.db.DbHelper;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.port.IProductModel;
 import com.fengkai.zhouyang.yangyanghongkong.db.ProductDatabase;
 
@@ -15,12 +14,15 @@ public class ProductImpl implements IProductModel {
 
     @Override
     public List<Product> queryAllData() {
-        ArrayList<Product> products = ProductDatabase.queryAllProduct();
+        List<Product> products = ProductDatabase.queryAllProduct();
+        if (products == null){
+            products = new ArrayList<>();
+        }
         return products;
     }
 
     @Override
-    public void deleteProductById(int id) {
+    public void deleteProductById(long id) {
         ProductDatabase.deleteById(id);
     }
 }

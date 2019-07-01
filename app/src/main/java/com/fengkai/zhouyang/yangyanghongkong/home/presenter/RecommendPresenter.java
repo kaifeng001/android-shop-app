@@ -2,6 +2,7 @@ package com.fengkai.zhouyang.yangyanghongkong.home.presenter;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.Product;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.ProductImpl;
@@ -17,7 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class RecommendPresenter {
+public class RecommendPresenter implements DialogInterface.OnDismissListener {
     private IRecommend mRecommend;
     private ProductImpl mImp;
     private List<Product> mList = new ArrayList<>();
@@ -88,6 +89,7 @@ public class RecommendPresenter {
             Product product = next.getValue();
             mEditDialog = new EditProductDialog(context, product);
             mEditDialog.setIconSelectListener(listener);
+            mEditDialog.setOnDismissListener(this);
             mEditDialog.show();
         }
 
@@ -95,5 +97,12 @@ public class RecommendPresenter {
 
     public void showSelectIconEdit(String path) {
         mEditDialog.showSelectIcon(path);
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        setData();
+        mRecommend.exitEditState();
+        mSelects.clear();
     }
 }

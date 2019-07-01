@@ -121,7 +121,7 @@ public class CustomerAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 Customer customer = mList.get(position);
-                CustomerDatabase.deleteById(customer.id);
+                CustomerDatabase.getInstance().deleteById(customer.id);
                 mList.remove(position);
                 notifyItemRemoved(position);
                 Toast.makeText(mContext, "删除成功", Toast.LENGTH_SHORT).show();

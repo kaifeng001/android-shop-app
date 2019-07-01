@@ -20,7 +20,7 @@ public class AddCustomerActivity extends AppCompatActivity implements View.OnCli
     private EditText mPhone;
     public static final int HAD_ADD_CUSTOMER = 2;
     public static final int EDIT_BACK = 3;
-    private int mId = -1;
+    private long mId = -1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class AddCustomerActivity extends AppCompatActivity implements View.OnCli
         String name = intent.getStringExtra("name");
         String address = intent.getStringExtra("address");
         String phone = intent.getStringExtra("phone");
-        mId = intent.getIntExtra("id", -1);
+        mId = intent.getLongExtra("id", -1);
         if (name != null) {
             mName.setText(name);
         }
@@ -91,14 +91,15 @@ public class AddCustomerActivity extends AppCompatActivity implements View.OnCli
                 customer.name = name;
                 customer.phone = phone;
                 customer.address = address;
+                customer.id = mId;
                 if (mId == -1) {
                     Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
                     setResult(HAD_ADD_CUSTOMER);
-                    CustomerDatabase.insertDb(customer);
+                    CustomerDatabase.getInstance().insertDb(customer);
                 } else {
                     Toast.makeText(this, "编辑完成", Toast.LENGTH_SHORT).show();
                     setResult(EDIT_BACK);
-                    CustomerDatabase.updateById(customer, mId);
+                    CustomerDatabase.getInstance().updateDb(customer);
                 }
                 finish();
                 break;

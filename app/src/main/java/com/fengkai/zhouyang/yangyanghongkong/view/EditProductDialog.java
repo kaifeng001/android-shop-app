@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
 import com.fengkai.zhouyang.yangyanghongkong.R;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.Product;
-import com.fengkai.zhouyang.yangyanghongkong.db.DbHelper;
+import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.ProductImpl;
 import com.fengkai.zhouyang.yangyanghongkong.db.ProductDatabase;
 import com.makeramen.roundedimageview.RoundedImageView;
 
@@ -28,11 +28,13 @@ public class EditProductDialog extends BottomDialog {
     private EditText mNum;
     private String mPath;
     private long mId;
+    private ProductImpl mBiz;
 
     public EditProductDialog(@NonNull Context context, Product product) {
         super(context);
         initView(context);
         initData(product);
+        mBiz = new ProductImpl();
     }
 
     private void initData(Product product) {
@@ -96,7 +98,7 @@ public class EditProductDialog extends BottomDialog {
             Toast.makeText(mContext, "件数不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
-        ProductDatabase.updateById(product, mId);
+        mBiz.updateProduct(mId,product);
         Toast.makeText(mContext, "更新数据成功", Toast.LENGTH_SHORT).show();
         dismiss();
     }

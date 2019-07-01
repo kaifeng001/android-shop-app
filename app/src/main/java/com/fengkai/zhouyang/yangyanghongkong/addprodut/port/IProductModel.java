@@ -10,4 +10,6 @@ public interface IProductModel {
     List<Product> queryAllData();
 
     void deleteProductById(long id);
+
+    void updateProduct(long id, Product product);
 }

@@ -26,6 +26,6 @@ public class AddProductPresenter {
         product.num = mView.getProductNum();
         mBiz.insertData(product);
         Toast.makeText(MainAplication.getInstance().getApplicationContext(), "数据库个数" +
-                ProductDatabase.queryCount(), Toast.LENGTH_SHORT).show();
+                mBiz.queryAllData().size(), Toast.LENGTH_SHORT).show();
     }
 }

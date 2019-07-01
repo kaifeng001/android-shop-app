@@ -17,6 +17,7 @@ import com.fengkai.zhouyang.yangyanghongkong.customer.model.Customer;
 import com.fengkai.zhouyang.yangyanghongkong.db.CustomerDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerActivity extends AppCompatActivity implements View.OnClickListener {
     public static final int GO_ADD_CUSTOMER = 1;
@@ -33,7 +34,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initData() {
-        ArrayList<Customer> customers = CustomerDatabase.queryAllProduct();
+        List<Customer> customers = CustomerDatabase.getInstance().queryAllProduct();
         mAdapter.setData(customers);
         mAdapter.notifyDataSetChanged();
     }

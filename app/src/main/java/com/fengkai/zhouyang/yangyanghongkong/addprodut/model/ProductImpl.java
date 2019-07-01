@@ -9,12 +9,12 @@ import java.util.List;
 public class ProductImpl implements IProductModel {
     @Override
     public void insertData(Product product) {
-        ProductDatabase.insertDb(product);
+        ProductDatabase.getInstance().insertDb(product);
     }
 
     @Override
     public List<Product> queryAllData() {
-        List<Product> products = ProductDatabase.queryAllProduct();
+        List<Product> products = ProductDatabase.getInstance().queryAllProduct();
         if (products == null){
             products = new ArrayList<>();
         }
@@ -23,6 +23,12 @@ public class ProductImpl implements IProductModel {
 
     @Override
     public void deleteProductById(long id) {
-        ProductDatabase.deleteById(id);
+        ProductDatabase.getInstance().deleteById(id);
+    }
+
+    @Override
+    public void updateProduct(long id, Product product) {
+        product.id = id;
+        ProductDatabase.getInstance().updateDb(product);
     }
 }

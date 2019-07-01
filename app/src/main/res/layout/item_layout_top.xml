@@ -17,10 +17,13 @@
 
     <ImageView
         android:id="@+id/top_back"
-        android:layout_width="12dp"
-        android:layout_height="22dp"
+        android:layout_width="49dp"
+        android:layout_height="match_parent"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="15dp"
+        android:paddingLeft="19dp"
+        android:paddingTop="13dp"
+        android:paddingRight="19dp"
+        android:paddingBottom="13dp"
         android:scaleType="fitXY"
         android:src="@mipmap/back"
         android:visibility="gone" />

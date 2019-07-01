@@ -58,7 +58,7 @@ public class CustomerAdapter extends RecyclerView.Adapter {
                 customerHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
-                        showCopy(customerHolder.itemView, name + phone + "\\n" + address, position);
+                        showCopy(customerHolder.itemView, name + phone + "\n" + address, position);
                         return true;
                     }
                 });

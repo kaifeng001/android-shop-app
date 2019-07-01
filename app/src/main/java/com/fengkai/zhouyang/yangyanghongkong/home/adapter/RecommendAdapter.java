@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -70,11 +71,10 @@ public class RecommendAdapter extends RecyclerView.Adapter {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void share(View view, String iconPath) {
         Intent intent = new Intent(mActivity, ProductDetailsActivity.class);
         intent.putExtra("icon", iconPath);
-        Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(mActivity,view,"share").toBundle();
+        Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity, view, "share").toBundle();
         mActivity.startActivity(intent, bundle);
     }
 
@@ -95,9 +95,7 @@ public class RecommendAdapter extends RecyclerView.Adapter {
         proHolder.mIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    share(proHolder.mIcon, product.icon);
-                }
+                share(proHolder.mIcon, product.icon);
             }
         });
         proHolder.itemView.setOnClickListener(new View.OnClickListener() {

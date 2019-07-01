@@ -28,7 +28,7 @@ import java.util.List;
 public class RecommendFragment extends BaseFragment implements IRecommend, View.OnClickListener {
     private RecyclerView mRecycler;
     private TextView mDelete;
-    private TextView mEdit;
+    private TextView mRight;
     private RecommendAdapter mAdapter;
     private RecommendPresenter mPresenter;
     private String mPath;
@@ -68,8 +68,8 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
     public void initTitle(View view) {
         if (mType == Constant.ALL) {
             mDelete = view.findViewById(R.id.top_delete);
-            mEdit = view.findViewById(R.id.top_right);
-            mEdit.setText("编辑");
+            mRight = view.findViewById(R.id.top_right);
+            joinAddState();
         } else {
             View topView = view.findViewById(R.id.recommend_top);
             topView.setVisibility(View.GONE);
@@ -86,12 +86,7 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
         mAdapter.setOnItemClickListener(new RecommendAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent;
-                if (mAdapter.getItemViewType(position) == RecommendAdapter.ADD_TYPE) {
-                    intent = new Intent(getContext(), AddProductActivity.class);
-                } else {
-                    intent = new Intent(getContext(), ProductDetailsActivity.class);
-                }
+                Intent intent = new Intent(getContext(), ProductDetailsActivity.class);
                 startActivityForResult(intent, GO_DETAIL);
             }
         });
@@ -111,7 +106,7 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
             }
         });
         mDelete.setOnClickListener(this);
-        mEdit.setOnClickListener(this);
+        mRight.setOnClickListener(this);
     }
 
     public void setBackListener(View view) {
@@ -149,16 +144,17 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
 
     @Override
     public void joinEditState() {
-        mEdit.setVisibility(View.VISIBLE);
+        mRight.setText("编辑");
+        mRight.setVisibility(View.VISIBLE);
         mDelete.setVisibility(View.VISIBLE);
         mAdapter.setEditState(true);
     }
 
     @Override
     public void exitEditState() {
-        mEdit.setVisibility(View.GONE);
         mDelete.setVisibility(View.GONE);
         mAdapter.setEditState(false);
+        joinAddState();
     }
 
     @Override
@@ -175,9 +171,9 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
     @Override
     public void productIsEdited(boolean isCanEdited) {
         if (isCanEdited) {
-            mEdit.setVisibility(View.VISIBLE);
+            mRight.setVisibility(View.VISIBLE);
         } else {
-            mEdit.setVisibility(View.GONE);
+            mRight.setVisibility(View.GONE);
         }
     }
 
@@ -206,12 +202,17 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
                 mPresenter.deleteSelectProduct();
                 break;
             case R.id.top_right:
-                mPresenter.dealEditCLick(getContext(), new EditProductDialog.OnIconSelectClickListener() {
-                    @Override
-                    public void onIconSelectClick() {
-                        FileUtil.goPhotoSelect(RecommendFragment.this);
-                    }
-                });
+                if (!mAdapter.getEditState()) {
+                    Intent intent = new Intent(getContext(), AddProductActivity.class);
+                    startActivityForResult(intent, GO_DETAIL);
+                } else {
+                    mPresenter.dealEditCLick(getContext(), new EditProductDialog.OnIconSelectClickListener() {
+                        @Override
+                        public void onIconSelectClick() {
+                            FileUtil.goPhotoSelect(RecommendFragment.this);
+                        }
+                    });
+                }
                 break;
         }
     }
@@ -219,5 +220,15 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
     @Override
     public int getType() {
         return mType;
+    }
+
+    @Override
+    public void joinAddState() {
+        boolean editState = mAdapter.getEditState();
+        if (!editState) {
+            mRight.setVisibility(View.VISIBLE);
+            mRight.setText("添加");
+            mRight.setOnClickListener(this);
+        }
     }
 }

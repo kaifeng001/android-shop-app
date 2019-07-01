@@ -5,7 +5,6 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +27,6 @@ import java.util.List;
 
 public class RecommendAdapter extends RecyclerView.Adapter {
     public static final int PRODUCT_TYPE = 0;
-    public static final int ADD_TYPE = 1;
 
     private List<Product> mList = new ArrayList<>();
     private OnItemClickListener mListener;
@@ -58,10 +56,7 @@ public class RecommendAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View inflate;
         RecyclerView.ViewHolder holder = null;
-        if (viewType == ADD_TYPE) {
-            inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout_add, parent, false);
-            holder = new AddHolder(inflate);
-        } else if (viewType == PRODUCT_TYPE) {
+        if (viewType == PRODUCT_TYPE) {
             inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product, parent, false);
             holder = new ProductHolder(inflate);
         }
@@ -72,23 +67,7 @@ public class RecommendAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof ProductHolder) {
             binderProduct((ProductHolder) holder, position);
-        } else if (holder instanceof AddHolder) {
-            binderAddHolder((AddHolder) holder, position);
         }
-    }
-
-    private void binderAddHolder(@NonNull AddHolder holder, final int position) {
-        AddHolder addHolder = holder;
-        addHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mIsEditState) {
-                    return;
-                } else {
-                    mListener.onItemClick(position);
-                }
-            }
-        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -181,13 +160,6 @@ public class RecommendAdapter extends RecyclerView.Adapter {
             mPrice = itemView.findViewById(R.id.pr_price);
             mNum = itemView.findViewById(R.id.pr_buy_num);
             mCheck = itemView.findViewById(R.id.prod_checkbox);
-        }
-    }
-
-    private class AddHolder extends RecyclerView.ViewHolder {
-
-        public AddHolder(@NonNull View itemView) {
-            super(itemView);
         }
     }
 

@@ -20,4 +20,6 @@ public interface IRecommend {
     void removeItem(int position, List<Product> data);
 
     int getType();
+
+    void joinAddState();
 }

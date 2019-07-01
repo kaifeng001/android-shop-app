@@ -33,11 +33,6 @@ public class RecommendPresenter {
         List<Product> products = mImp.queryAllData();
         mList.clear();
         mList.addAll(products);
-        if (Config.isBusness && mRecommend.getType() == Constant.ALL) {
-            Product addType = new Product();
-            addType.type = RecommendAdapter.ADD_TYPE;
-            mList.add(addType);
-        }
         mRecommend.initRecyclerView(mList);
     }
 

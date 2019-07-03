@@ -1,14 +1,10 @@
 package com.fengkai.zhouyang.yangyanghongkong.addprodut.activity;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,14 +16,15 @@ import com.fengkai.zhouyang.yangyanghongkong.R;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.port.AddProduct;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.presenter.AddProductPresenter;
 import com.fengkai.zhouyang.yangyanghongkong.utils.FileUtil;
-import com.fengkai.zhouyang.yangyanghongkong.utils.Utils;
+import com.fengkai.zhouyang.yangyanghongkong.view.AddSettingView;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 public class AddProductActivity extends AppCompatActivity implements View.OnClickListener, AddProduct {
     private TextView mIcon;
-    private EditText mTitle;
-    private EditText mPrice;
-    private EditText mNum;
+    private AddSettingView mTitle;
+    private AddSettingView mPrice;
+    private AddSettingView mNum;
+    private AddSettingView mType;
     private Button mConfirm;
     private String mPath;
     private AddProductPresenter mPresenter;
@@ -50,6 +47,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         mNum = findViewById(R.id.prod_num);
         mConfirm = findViewById(R.id.confirm);
         mIconImage = findViewById(R.id.prod_icon_image);
+        mType = findViewById(R.id.prod_type);
 
         mIcon.setOnClickListener(this);
         mConfirm.setOnClickListener(this);
@@ -81,13 +79,13 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         if (TextUtils.isEmpty(mPath)) {
             Toast.makeText(this, "图片不能路径为空", Toast.LENGTH_SHORT).show();
             return;
-        } else if (TextUtils.isEmpty(mTitle.getText().toString())) {
+        } else if (TextUtils.isEmpty(mTitle.getEditText())) {
             Toast.makeText(this, "标题不能为空", Toast.LENGTH_SHORT).show();
             return;
-        } else if (TextUtils.isEmpty(mPrice.getText().toString())) {
+        } else if (TextUtils.isEmpty(mPrice.getEditText())) {
             Toast.makeText(this, "价格不能为空", Toast.LENGTH_SHORT).show();
             return;
-        } else if (TextUtils.isEmpty(mNum.getText().toString())) {
+        } else if (TextUtils.isEmpty(mNum.getEditText())) {
             Toast.makeText(this, "件数不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -109,19 +107,19 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public String getProductTitle() {
-        String title = mTitle.getText().toString();
+        String title = mTitle.getEditText();
         return title;
     }
 
     @Override
     public String getProductPrice() {
-        String price = mPrice.getText().toString();
+        String price = mPrice.getEditText();
         return price;
     }
 
     @Override
     public String getProductNum() {
-        String num = mNum.getText().toString();
+        String num = mNum.getEditText();
         return num;
     }
 

@@ -13,16 +13,19 @@ public class Product {
     public String title;
     public String price;
     public String num;
+    public int productType;
     @Transient
     public int type;
 
-    @Generated(hash = 1652825074)
-    public Product(Long id, String icon, String title, String price, String num) {
+    @Generated(hash = 641694707)
+    public Product(Long id, String icon, String title, String price, String num,
+            int productType) {
         this.id = id;
         this.icon = icon;
         this.title = title;
         this.price = price;
         this.num = num;
+        this.productType = productType;
     }
 
     @Generated(hash = 1890278724)
@@ -67,6 +70,14 @@ public class Product {
 
     public void setNum(String num) {
         this.num = num;
+    }
+
+    public int getProductType() {
+        return this.productType;
+    }
+
+    public void setProductType(int productType) {
+        this.productType = productType;
     }
 
 }

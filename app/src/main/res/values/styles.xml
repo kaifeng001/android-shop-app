@@ -5,6 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="android:statusBarColor">@android:color/white</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="CheckboxStyle" parent="@android:style/Widget.CompoundButton.CheckBox">

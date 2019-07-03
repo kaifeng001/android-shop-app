@@ -56,105 +56,40 @@
         android:layout_marginTop="15dp"
         android:background="#d2d2d2"></View>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="标题设置"
-            android:textColor="@android:color/black"
-            android:textSize="15sp" />
-
-    </RelativeLayout>
-
-
-    <EditText
+    <com.fengkai.zhouyang.yangyanghongkong.view.AddSettingView
         android:id="@+id/prod_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/shape_shadow"
-        android:hint="请输入标题"
-        android:padding="8dp"
-        android:textSize="12sp" />
+        app:hint="请输入标题"
+        app:isDivider="true"
+        app:title="标题设置" />
 
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginTop="15dp"
-        android:background="#d2d2d2"></View>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="价格设置"
-            android:textColor="@android:color/black"
-            android:textSize="15sp" />
-
-    </RelativeLayout>
-
-
-    <EditText
+    <com.fengkai.zhouyang.yangyanghongkong.view.AddSettingView
         android:id="@+id/prod_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/shape_shadow"
-        android:hint="请输入金额"
-        android:inputType="number|numberDecimal"
-        android:padding="8dp"
-        android:textSize="12sp" />
+        app:hint="请输入金额"
+        app:inputType="number|numberDecimal"
+        app:isDivider="true"
+        app:title="价格设置" />
 
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginTop="15dp"
-        android:background="#d2d2d2"></View>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="件数设置"
-            android:textColor="@android:color/black"
-            android:textSize="15sp" />
-
-    </RelativeLayout>
-
-
-    <EditText
+    <com.fengkai.zhouyang.yangyanghongkong.view.AddSettingView
         android:id="@+id/prod_num"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/shape_shadow"
-        android:hint="请输入卖出件数"
-        android:inputType="number|numberDecimal"
-        android:padding="8dp"
-        android:textSize="12sp" />
+        app:hint="请输入卖出件数"
+        app:inputType="number|numberDecimal"
+        app:isDivider="true"
+        app:title="件数设置" />
+
+    <com.fengkai.zhouyang.yangyanghongkong.view.AddSettingView
+        android:id="@+id/prod_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hint="请选择类型"
+        app:inputType="number|numberDecimal"
+        app:isDivider="false"
+        app:title="类型设置" />
 
     <Button
         android:id="@+id/confirm"
@@ -167,4 +102,5 @@
         android:padding="5dp"
         android:text="确认"
         android:textColor="@color/text_normal_select" />
+
 </LinearLayout>

@@ -1504,4 +1504,13 @@ public class LibTools {
             Toast.makeText(context, "支付宝付款码打开失败", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public static int getStateBarHeight() {
+        int result = dp2px(20);
+        int resourceId = MainAplication.getInstance().getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = MainAplication.getInstance().getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
 }

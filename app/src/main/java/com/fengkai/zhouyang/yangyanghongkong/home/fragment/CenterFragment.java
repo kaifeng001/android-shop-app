@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
+import com.fengkai.zhouyang.yangyanghongkong.AlgorithmUtils;
 import com.fengkai.zhouyang.yangyanghongkong.R;
 import com.fengkai.zhouyang.yangyanghongkong.constant.Constant;
 import com.fengkai.zhouyang.yangyanghongkong.customer.acitivity.CustomerActivity;
@@ -52,6 +53,7 @@ public class CenterFragment extends BaseFragment implements View.OnClickListener
             case R.id.center_item_customer:
                 Intent intent = new Intent(getContext(), CustomerActivity.class);
                 startActivity(intent);
+                AlgorithmUtils.testAlgorithm();
                 break;
             case R.id.center_icon:
                 FileUtil.goPhotoSelect(this);

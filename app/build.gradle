@@ -2,11 +2,11 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 27
     defaultConfig {
         applicationId "com.fengkai.zhouyang.yangyanghongkong"
         minSdkVersion 23
-        targetSdkVersion 28
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -59,6 +59,7 @@ android {
                     APP_NAME: "杨杨过港商户版"]
         }
     }
+    buildToolsVersion = '29.0.0'
 }
 
 dependencies {
@@ -74,7 +75,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     implementation 'org.greenrobot:greendao:3.2.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
-    implementation project(path: ':shareelementanimation')
+//    implementation project(path: ':shareelementanimation')
 }
 
 greendao {

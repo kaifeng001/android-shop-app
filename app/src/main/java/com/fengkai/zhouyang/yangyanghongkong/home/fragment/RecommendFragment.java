@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fengkai.zhouyang.yangyanghongkong.R;
+import com.fengkai.zhouyang.yangyanghongkong.activity.BannerViewActivity;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.model.Product;
 import com.fengkai.zhouyang.yangyanghongkong.addprodut.activity.AddProductActivity;
 import com.fengkai.zhouyang.yangyanghongkong.activity.ProductDetailsActivity;
@@ -86,8 +87,9 @@ public class RecommendFragment extends BaseFragment implements IRecommend, View.
         mAdapter.setOnItemClickListener(new RecommendAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent(getContext(), ProductDetailsActivity.class);
-                startActivityForResult(intent, GO_DETAIL);
+                Intent intent = new Intent(getContext(), BannerViewActivity.class);
+//                startActivityForResult(intent, GO_DETAIL);
+                startActivity(intent);
             }
         });
         if (mType != Constant.ALL) {

@@ -50,6 +50,11 @@
             android:screenOrientation="portrait"></activity>
 
         <activity
+            android:name=".activity.BannerViewActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
             android:name=".customer.acitivity.AddCustomerActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
             android:screenOrientation="portrait"></activity>
